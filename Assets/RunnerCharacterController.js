@@ -28,7 +28,7 @@ function FixedUpdate () {
 	rigidbody2D.velocity.x = currentSpeed;
 	
 	if (Input.GetAxis("Vertical")) {
-		//Debug.Log("jump");
+		Debug.Log("jump");
 		
 		var start = transform.position;
 		start.y -= groundRayOffset;
@@ -40,7 +40,7 @@ function FixedUpdate () {
 		if (hit.collider != null && hit.collider.tag == "Ground") {
 			Debug.Log("hit");
 			Debug.Log(hit.collider);
-			//rigidbody2D.AddForce(Vector2.up * jumpForce);
+			rigidbody2D.AddForce(Vector2.up * jumpForce);
 			rigidbody2D.velocity.y = jumpForce;
 		}
 	}
