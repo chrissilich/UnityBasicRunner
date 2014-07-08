@@ -2,14 +2,20 @@
 
 
 
-function OnCollisionEnter2D(coll: Collision2D) {
-	//Debug.Log("coll");
+function OnTriggerEnter2D(coll: Collider2D) {
 	if (coll.gameObject.tag == "Player") {
-		//coll.gameObject.SendMessage("ApplyDamage", 10);
 		//Debug.Log("coll with player");
+		
+		//Destroy(gameObject, 0.2);
+		
+		coll.gameObject.SendMessage("boost");
+		
 		var cam = GameObject.FindGameObjectWithTag("MainCamera");
-		var cameraEffectsScript:CameraEffects = cam.GetComponent(typeof(CameraEffects));
-		cameraEffectsScript.bounce();
+		cam.SendMessage("bounceIn", 0);
+		cam.SendMessage("bounceOut", 1);
+		cam.SendMessage("slow", 0.25);
+		cam.SendMessage("normal", 1);
+		
 	}
 }
 

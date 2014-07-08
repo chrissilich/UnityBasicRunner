@@ -14,18 +14,22 @@ function Start () {
 	rigidbody2D.velocity.x = startVelocity;
 }
 
-// Frame update example: Draws a 10 meter long green line from the position for 1 frame.
 function Update () {
 	var start = transform.position;
 	start.y -= groundRayOffset;
 	Debug.DrawRay(start, -Vector2.up * groundRayHeight, Color.green, 0.1);
 }
 
+
 function FixedUpdate () {
-	if (currentSpeed < maxVelocity) {
+	if (currentSpeed < maxVelocity ) {
+		// if we're still under max speed, bump up the speed
 		currentSpeed += velocityIncrement;
 	}
-	rigidbody2D.velocity.x = currentSpeed;
+	if (currentSpeed > rigidbody2D.velocity.x) {
+		// if the character is not moving as fast as our desired speed, speed him up
+		rigidbody2D.velocity.x = currentSpeed;
+	}
 	
 	if (Input.GetAxis("Vertical")) {
 		Debug.Log("jump");
@@ -40,7 +44,6 @@ function FixedUpdate () {
 		if (hit.collider != null && hit.collider.tag == "Ground") {
 			Debug.Log("hit");
 			Debug.Log(hit.collider);
-			rigidbody2D.AddForce(Vector2.up * jumpForce);
 			rigidbody2D.velocity.y = jumpForce;
 		}
 	}
@@ -48,6 +51,12 @@ function FixedUpdate () {
 	if (transform.position.y < -1) {
 		die();
 	}
+}
+
+function boost() {
+	Debug.Log("boost");
+	rigidbody2D.velocity.y = jumpForce * 0.3;
+	rigidbody2D.velocity.x = rigidbody2D.velocity.x * 5;
 }
 
 function die() {
