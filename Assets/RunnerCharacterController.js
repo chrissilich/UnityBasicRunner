@@ -17,10 +17,14 @@ function Start () {
 
 
 function FixedUpdate () {
-	if (currentSpeed < maxVelocity) {
+	if (currentSpeed < maxVelocity ) {
+		// if we're still under max speed, bump up the speed
 		currentSpeed += velocityIncrement;
 	}
-	rigidbody2D.velocity.x = currentSpeed;
+	if (currentSpeed > rigidbody2D.velocity.x) {
+		// if the character is not moving as fast as our desired speed, speed him up
+		rigidbody2D.velocity.x = currentSpeed;
+	}
 	
 	var start = transform.position;
 	start.y -= groundRayOffset;
@@ -44,7 +48,6 @@ function FixedUpdate () {
 		Debug.Log("jump");
 		
 		if (grounded) {
-			//rigidbody2D.AddForce(Vector2.up * jumpForce);
 			rigidbody2D.velocity.y = jumpForce;
 		}
 	}
@@ -52,6 +55,12 @@ function FixedUpdate () {
 	if (transform.position.y < -1) {
 		die();
 	}
+}
+
+function boost() {
+	Debug.Log("boost");
+	rigidbody2D.velocity.y = jumpForce * 0.3;
+	rigidbody2D.velocity.x = rigidbody2D.velocity.x * 5;
 }
 
 function die() {
