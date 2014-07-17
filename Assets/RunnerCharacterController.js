@@ -7,6 +7,8 @@ var jumpForce = 10;
 
 private var currentSpeed:float = startVelocity;
 
+var groundRayOffset:float = 1.1;
+
 
 function Start () {
 	rigidbody2D.velocity.x = startVelocity;
@@ -25,7 +27,7 @@ function FixedUpdate () {
 	}
 	
 	var start = transform.position;
-	start.y -= groundRayOffset;
+	start.y -= groundRayOffset; // this moves the start of the RAY down by 110cm
 		
 	Debug.DrawRay(start, -Vector2.up, Color.red, 1);
 	var hit:RaycastHit2D = Physics2D.Raycast(start, -Vector2.up, 0.03);
