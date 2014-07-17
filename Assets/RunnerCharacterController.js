@@ -7,7 +7,6 @@ var jumpForce = 10;
 
 private var currentSpeed:float = startVelocity;
 
-var groundRayOffset:float = 1.1;
 
 
 function Start () {
@@ -27,10 +26,10 @@ function FixedUpdate () {
 	}
 	
 	var start = transform.position;
-	start.y -= groundRayOffset; // this moves the start of the RAY down by 110cm
+	start.y -= 1.1; // this moves the start of the RAY down by 110cm
 		
-	Debug.DrawRay(start, -Vector2.up, Color.red, 1);
-	var hit:RaycastHit2D = Physics2D.Raycast(start, -Vector2.up, 0.03);
+	Debug.DrawRay(start, -Vector2.up, Color.red, 1); // draws 1m line by default
+	var hit:RaycastHit2D = Physics2D.Raycast(start, -Vector2.up, 0.03); // last arg sets distance
 	
 	var grounded = false;
 	if (hit.collider != null && hit.collider.tag == "Ground" /* optional */) {
