@@ -7,8 +7,6 @@ var jumpForce = 10;
 
 private var currentSpeed:float = startVelocity;
 
-var groundRayOffset:float = 1.1;
-
 
 function Start () {
 	rigidbody2D.velocity.x = startVelocity;
